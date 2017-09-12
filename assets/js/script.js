@@ -324,7 +324,8 @@ $(function(){
 				scannedFiles.forEach(function(f) {
 
 					var fileSize = bytesToSize(f.size),
-						name = escapeHTML(f.name),
+						// name = escapeHTML(f.name),
+						name = extractData(f.name)[0],
 						fileType = name.split('.'),
 						icon = '<span class="icon file"></span>';
 

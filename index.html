@@ -46,6 +46,26 @@
 	<script type="text/javascript" src="assets/js/plupload/jquery.ui.plupload/jquery.ui.plupload.min.js" charset="UTF-8"></script>
 	<script type="text/javascript">
 
+		function titlelize(title) {
+		   return title.replace(/(^|[. ]+)(\S)/g, function(all, pre, c) { return ((pre) ? ' ' : '') + c.toUpperCase(); });
+		};
+
+		function extractData(it, html) {
+		   var regex = /^(.+?)[.( \t]*(?:(19\d{2}|20(?:0\d|1[0-9])).*|(?:(?=bluray|\d+p|brrip|webrip)..*)?[.](mkv|avi|mpe?g|mp4)$)/i;
+
+		   var out = new Array(2);
+
+		   if ( m = regex.exec(it) ) {
+			   out[0] = titlelize(m[1]) || '-';
+			   out[1] = m[2] || '-';
+		   } else {
+		       out[0] = '<font color="red">No match</font>';
+		   }
+		   //the replace is an hack to remove html in live input text
+		//    return (html) ? out : out.replace(/<[^>]+>|&[^;]+;/g,'');
+		return out;
+		}
+
 		$(function() {
 		    $("#uploader").plupload({
 		        // General settings
