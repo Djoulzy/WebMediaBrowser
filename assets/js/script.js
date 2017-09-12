@@ -197,6 +197,7 @@ $(function(){
 		// Splits a file path and turns it into clickable breadcrumbs
 
 		function generateBreadcrumbs(nextDir){
+			window.actual_dir = nextDir;
 			var path = nextDir.split('/').slice(0);
 			for(var i=1;i<path.length;i++){
 				path[i] = path[i-1]+ '/' +path[i];

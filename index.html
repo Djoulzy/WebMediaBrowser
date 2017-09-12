@@ -32,7 +32,6 @@
 		    <p>Your browser doesn't have HTML5 support.</p>
 		</div>
 	</div>
-
 	<!-- <footer>
         <a class="tz" href="http://tutorialzine.com/2014/09/cute-file-browser-jquery-ajax-php/">Cute File Browser with jQuery, AJAX and PHP</a>
         <div id="tzine-actions"></div>
@@ -45,13 +44,14 @@
 	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="assets/js/plupload/plupload.full.min.js"></script>
 	<script type="text/javascript" src="assets/js/plupload/jquery.ui.plupload/jquery.ui.plupload.min.js" charset="UTF-8"></script>
-	<script src="assets/js/script.js"></script>
 	<script type="text/javascript">
+
 		$(function() {
 		    $("#uploader").plupload({
 		        // General settings
 		        runtimes : 'html5',
-		        url : "/assets/php/upload.php",
+				php_uploader: '/assets/php/upload.php',
+		        url : '',
 
 		        // Maximum file size
 		        max_file_size : '10Gb',
@@ -84,8 +84,16 @@
 		        views: {
 		            active: 'thumbs'
 		        },
+
+				// Post init events, bound after the internal events
+				init : {
+					BeforeUpload: function(up, file) {
+						up.settings.url = up.settings.php_uploader + '?dest=' +window.actual_dir;
+					},
+				}
 		    });
 		});
 	</script>
+	<script src="assets/js/script.js"></script>
 </body>
 </html>

@@ -1,54 +1,6 @@
 <?php
-// $file = $_POST['file'];
-// $name = $_POST['name'];
-//
-// $path = 'images/affiches/'.$name;
-// // echo $path;
-// $fd = fopen("./upload.log", "a");
-// fwrite($fd, $path."\n");
-// fclose($fd);
-//
-// $encodedData = str_replace(' ','+',$file);
-// $decodedData = base64_decode($encodedData);
-//
-// file_put_contents($path, $decodedData) ;
-//
-// echo var_export($_POST, true);
 
-$uploaddir = '/var/www/html/assets/php/images/affiches/';
-// $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
-//
-// $fd = fopen("./upload.log", "a");
-// fwrite($fd, var_export($_FILES, true)."\n");
-// fclose($fd);
-//
-// echo '<pre>';
-// if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-//     echo "Le fichier est valide, et a été téléchargé
-//            avec succès. Voici plus d'informations :\n";
-// } else {
-//     echo "Attaque potentielle par téléchargement de fichiers.
-//           Voici plus d'informations :\n";
-// }
-//
-// echo 'Voici quelques informations de débogage :';
-// print_r($_FILES);
-//
-// echo '</pre>';
-
-// $fd = fopen("./upload.log", "a");
-// fwrite($fd, "POST: ".var_export($_POST, true)."\n");
-// fwrite($fd, "FILES: ".var_export($_FILES, true)."\n");
-// fclose($fd);
-//
-// if (empty($_FILES) || $_FILES["file"]["error"]) {
-//   die('{"OK": 0}');
-// }
-//
-// $fileName = $_FILES["file"]["name"];
-// move_uploaded_file($_FILES["file"]["tmp_name"], $uploaddir.$fileName);
-//
-// die('{"OK": 1}');
+$uploaddir = '../../'.$_REQUEST["dest"].'/';
 
 if (empty($_FILES) || $_FILES['file']['error']) {
   die('{"OK": 0, "info": "Failed to move uploaded file."}');
