@@ -154,6 +154,7 @@ body {
 
 .filemanager .data {
 	margin-top: 60px;
+	margin-bottom: 20px;
 	z-index: -3;
 }
 
@@ -166,7 +167,7 @@ body {
 	border-radius: 3px;
 	background-color: #373743;
 	width: 400px;
-	height: 210px;
+	height: 240px;
 	list-style-type: none;
 	margin: 10px;
 	display: inline-block;

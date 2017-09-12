@@ -326,15 +326,17 @@ $(function(){
 					var fileSize = bytesToSize(f.size),
 						// name = escapeHTML(f.name),
 						name = extractData(f.name)[0],
+						year = extractData(f.name)[1],
+						origine = extractData(f.name)[2],
+						qualite = extractData(f.name)[3],
 						fileType = name.split('.'),
-						icon = '<span class="icon file"></span>';
 
 					fileType = fileType[fileType.length-1];
 
 					// icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
-					icon = '<span class="icon file"><img src="http://10.31.100.200:9999/'+name+'" width="125px" /></span>';
+					icon = '<img class="icon file" src="http://192.168.0.51:9999/'+name+'" width="135px" />';
 
-					var file = $('<li class="files"><a href="'+ f.path+'" title="'+ f.path +'" class="files">'+icon+'<span class="name">'+ name +'</span> <span class="details">'+fileSize+'</span></a></li>');
+					var file = $('<li class="files"><a href="'+ f.path+'" title="'+ f.path +'" class="files">'+icon+'<span class="name">'+ name +'<br/>'+fileSize+year+origine+qualite+'</span></a></li>');
 					file.appendTo(fileList);
 				});
 
