@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<title>Cute file browser</title>
+
+
+	<!-- Include our stylesheet -->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/dark-hive/jquery-ui.css">
+	<link type="text/css" rel="stylesheet" href="assets/js/plupload/jquery.ui.plupload/css/jquery.ui.plupload.css" media="screen" />
+	<link href="assets/css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="filemanager">
+
+		<div class="search">
+			<input type="search" placeholder="Find a file.." />
+		</div>
+
+		<div class="breadcrumbs"></div>
+
+		<ul class="data"></ul>
+
+		<div class="nothingfound">
+			<div class="nofiles"></div>
+			<span>No files here.</span>
+		</div>
+
+		<div class="uploader" id="uploader">
+		    <p>Your browser doesn't have HTML5 support.</p>
+		</div>
+	</div>
+
+	<!-- <footer>
+        <a class="tz" href="http://tutorialzine.com/2014/09/cute-file-browser-jquery-ajax-php/">Cute File Browser with jQuery, AJAX and PHP</a>
+        <div id="tzine-actions"></div>
+        <span class="close"></span>
+    </footer> -->
+
+	<!-- Include our script files -->
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script> -->
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="assets/js/plupload/plupload.full.min.js"></script>
+	<script type="text/javascript" src="assets/js/plupload/jquery.ui.plupload/jquery.ui.plupload.min.js" charset="UTF-8"></script>
+	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		$(function() {
+		    $("#uploader").plupload({
+		        // General settings
+		        runtimes : 'html5',
+		        url : "/assets/php/upload.php",
+
+		        // Maximum file size
+		        max_file_size : '10Gb',
+		        chunk_size: '20mb',
+
+		        // Resize images on clientside if we can
+		        resize : {
+		            width : 200,
+		            height : 200,
+		            quality : 90,
+		            crop: true // crop to exact dimensions
+		        },
+
+		        // Specify what files to browse for
+		        filters : [
+		            {title : "VIDEO files", extensions : "mkv,avi,mp4"},
+					{title : "ARCHIVE files", extensions : "zip"}
+		        ],
+
+		        // Rename files by clicking on their titles
+		        rename: true,
+
+		        // Sort files
+		        sortable: true,
+
+		        // Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
+		        dragdrop: true,
+
+		        // Views to activate
+		        views: {
+		            active: 'thumbs'
+		        },
+		    });
+		});
+	</script>
+</body>
+</html>
