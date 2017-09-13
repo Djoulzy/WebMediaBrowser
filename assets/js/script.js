@@ -334,7 +334,7 @@ $(function(){
 					fileType = fileType[fileType.length-1];
 
 					// icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
-					icon = '<img class="icon file" src="http://10.31.100.200:9999/'+name+'" width="135px" />';
+					icon = '<img class="icon file" src="http://10.31.100.200:9999/w185/'+name+'/'+year+'" width="135px" />';
 
 					var file = $('<li class="files"><a href="'+ f.path+'" title="'+ f.path +'" class="files">'
 						+ icon
