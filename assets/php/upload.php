@@ -6,9 +6,9 @@ if (empty($_FILES) || $_FILES['file']['error']) {
   die('{"OK": 0, "info": "Failed to move uploaded file."}');
 }
 
-$fd = fopen("./upload.log", "a");
-fwrite($fd, "RCPT: ".$_FILES['file']['name'].", ".$_FILES['file']['size'].", errors: ".$_FILES['file']['error']."\n");
-fclose($fd);
+// $fd = fopen("./upload.log", "a");
+// fwrite($fd, "RCPT: ".$_FILES['file']['name'].", ".$_FILES['file']['size'].", errors: ".$_FILES['file']['error']."\n");
+// fclose($fd);
 
 $chunk = isset($_REQUEST["chunk"]) ? intval($_REQUEST["chunk"]) : 0;
 $chunks = isset($_REQUEST["chunks"]) ? intval($_REQUEST["chunks"]) : 0;
@@ -41,6 +41,7 @@ if ($out) {
 if (!$chunks || $chunk == $chunks - 1) {
   // Strip the temp .part suffix off
   rename("{$filePath}.part", $filePath);
+  unlink('../../dir.json');
 }
 
 die('{"OK": 1, "info": "Upload successful."}');
