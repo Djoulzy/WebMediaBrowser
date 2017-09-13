@@ -19,7 +19,7 @@ function scan($dir){
 
 		foreach(scandir($dir) as $f) {
 
-			if(!$f || $f[0] == '.') {
+			if(!$f || $f[0] == '.' || $f[0] == '@' || $f == 'thumb') {
 				continue; // Ignore hidden files
 			}
 
