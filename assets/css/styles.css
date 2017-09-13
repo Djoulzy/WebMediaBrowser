@@ -198,13 +198,28 @@ body {
 	font-size: 15px;
 	font-weight: 700;
 	line-height: 20px;
-	width: 150px;
+	width: 190px;
 	/*white-space: nowrap;*/
 	display: inline-block;
 	position: absolute;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	top: 40px;
+}
+
+.filemanager .data li .name .year {
+	color: #ffffff;
+	font-size: 12px;
+}
+
+.filemanager .data li .name .qualite {
+	color: #b3acac;
+	font-size: 12px;
+}
+
+.filemanager .data li .name .filesize {
+	color: #141313;
+	font-size: 10px;
 }
 
 .filemanager .data li .details {
