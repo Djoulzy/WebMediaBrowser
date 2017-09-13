@@ -294,7 +294,6 @@ $(function(){
 			if(scannedFolders.length) {
 
 				scannedFolders.forEach(function(f) {
-
 					var itemsLength = f.items.length,
 						name = escapeHTML(f.name),
 						icon = '<span class="icon folder"></span>';
@@ -377,13 +376,16 @@ $(function(){
 				});
 
 			}
-
 			breadcrumbs.text('').append(url);
 
 
 			// Show the generated elements
 
-			fileList.animate({'display':'inline-block'});
+			// fileList.animate({'display':'inline-block'});
+			// fileList.animate({
+			// 	display: true
+			// }, "fast");
+			fileList.fadeIn();
 
 		}
 
