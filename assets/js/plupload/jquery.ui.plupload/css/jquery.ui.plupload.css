@@ -19,8 +19,8 @@
 }
 
 .plupload_container {
-	_height: 300px;
-	min-height: 300px;
+	_height: 200px;
+	min-height: 200px;
 	position: relative;
 }
 
@@ -43,7 +43,7 @@
 .plupload_logo {
 	width: 40px;
 	height: 40px;
-	background: url('../img/plupload.png') no-repeat 0 0;
+	/*background: url('../img/plupload.png') no-repeat 0 0;*/
 	position: absolute;
 	top: 8px;
 	left: 8px;
@@ -207,7 +207,7 @@
 
 /* thumbs view */
 .plupload_view_thumbs .plupload_content {
-	top: 57px;
+	top: 10px;
 }
 
 .plupload_view_thumbs .plupload_filelist_header {
@@ -322,7 +322,7 @@
 	text-align: center;
 	vertical-align: middle;
 	border: 0;
-	line-height: 160px;
+	line-height: 60px;
 	display: none;
 }
 

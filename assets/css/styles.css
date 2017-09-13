@@ -567,6 +567,6 @@ footer #tzine-actions iframe{
 }
 
 .uploader {
-	height: 180px;
-	width: 250px;
+	margin-left: 30px;
+	width: 90%;
 }
