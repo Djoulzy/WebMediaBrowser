@@ -1,6 +1,6 @@
 <?php
 
-$dir = "t413";
+$dir = $_REQUEST["dir"];
 
 // This function scans the files folder recursively, and builds a large array
 function scan($dir)
@@ -37,19 +37,25 @@ function scan($dir)
 
 header('Content-type: application/json');
 
-if (file_exists("./dir.json"))
+if (file_exists("./dir.json") && !isset($_REQUEST["update"]))
 	readfile("./dir.json");
 else {
-	// Output the directory listing as JSON
-	$response = scan($dir);
-	$dir_list = json_encode(array(
-		"name" => $dir,
-		"type" => "folder",
-		"path" => $dir,
-		"items" => $response
-	));
+	if (isset($_REQUEST["update"])) {
+		$tmp_dir = json_decode(file_get_contents("./dir.json"));
+		var_dump($tmp_dir);
+	}
+	else {
+		// Output the directory listing as JSON
+		$response = scan($dir);
+		$dir_list = json_encode(array(
+			"name" => $dir,
+			"type" => "folder",
+			"path" => $dir,
+			"items" => $response
+		));
 
-	echo $dir_list;
-	file_put_contents("./dir.json", $dir_list);
+		echo $dir_list;
+		file_put_contents("./dir.json", $dir_list);
+	}
 }
 //
