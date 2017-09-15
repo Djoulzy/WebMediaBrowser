@@ -328,7 +328,8 @@ $(function(){
 						name = ext_data[0],
 						year = ext_data[1],
 						origine = ext_data[2],
-						qualite = ext_data[3];
+						qualite = ext_data[3],
+						langue = ext_data[4];
 
 						tmp = f.name.split('.');
 						fileType = tmp[tmp.length-1].toUpperCase();
@@ -342,6 +343,7 @@ $(function(){
 						+ '<span class="name">' + name + '<br/>'
 						+ '<span class="year">' + year + '</span><br/>'
 						+ '<span class="qualite">' + origine + ' - ' + qualite + '</span><br/>'
+						+ '<span class="qualite">' + langue + '</span><br/>'
 						+ '<span class="filetype">' + fileType + '</span> <span class="filesize">(' + fileSize + ')</span><br/>'
 						+'</span></a></li>');
 					file.appendTo(fileList);
