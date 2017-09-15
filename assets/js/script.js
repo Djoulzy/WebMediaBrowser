@@ -329,7 +329,7 @@ $(function(){
 						year = ext_data[1],
 						origine = ext_data[2],
 						qualite = ext_data[3],
-						langue = ext_data[4];
+						langue = ext_data[4].toUpperCase();
 
 						tmp = f.name.split('.');
 						fileType = tmp[tmp.length-1].toUpperCase();

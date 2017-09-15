@@ -75,9 +75,8 @@
 					   out[3] = o[2] || '-'; // Qualite
 				   }
 			   }
-			   if ( p = regex4.exec(tmp) ) {
-				   out[4] = p[1] || '-'; // Langue
-			   }
+			   if ( p = regex4.exec(tmp) ) out[4] = p[1] || '-'; // Langue
+			   else out[4] = '-';
 		   } else {
 		       out[0] = '<font color="red">No match</font>';
 		   }
