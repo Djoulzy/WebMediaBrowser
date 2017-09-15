@@ -322,15 +322,17 @@ $(function(){
 
 				scannedFiles.forEach(function(f) {
 
+					var ext_data = extractData(f.name);
 					var fileSize = bytesToSize(f.size),
 						// name = escapeHTML(f.name),
-						name = extractData(f.name)[0],
-						year = extractData(f.name)[1],
-						origine = extractData(f.name)[2],
-						qualite = extractData(f.name)[3],
-						fileType = name.split('.'),
+						name = ext_data[0],
+						year = ext_data[1],
+						origine = ext_data[2],
+						qualite = ext_data[3];
 
-					fileType = fileType[fileType.length-1];
+						tmp = f.name.split('.');
+						fileType = tmp[tmp.length-1].toUpperCase();
+					// fileType = fileType[fileType.length];
 
 					// icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
 					icon = '<img class="icon file" src="'+window.MVDB_Server+'/'+window.poster_size+'/'+name+'/'+year+'" width="135px" />';
@@ -340,7 +342,7 @@ $(function(){
 						+ '<span class="name">' + name + '<br/>'
 						+ '<span class="year">' + year + '</span><br/>'
 						+ '<span class="qualite">' + origine + ' - ' + qualite + '</span><br/>'
-						+ '<span class="filesize">(' + fileSize + ')</span><br/>'
+						+ '<span class="filetype">' + fileType + '</span> <span class="filesize">(' + fileSize + ')</span><br/>'
 						+'</span></a></li>');
 					file.appendTo(fileList);
 				});
