@@ -35,14 +35,45 @@ function scan($dir)
 	return $files;
 }
 
+function find($dirToScan, $dirArray, &$dataTree)
+{
+	$dirName = array_shift($dirArray);
+
+	if (($dataTree["type"] != "folder") || ($dataTree["name"] != $dirName))
+		return false;
+
+	if (empty($dirArray)) {
+		return scan($dirToScan);
+	}
+	else
+	{
+		$sub = $dirArray[0];
+		foreach($dataTree["items"] as $key => $obj)
+		{
+			if (($obj["type"] == "folder") && ($obj["name"] == $sub))
+			{
+				if ($ret = find($dirToScan, $dirArray, $dataTree["items"][$key]))
+					$dataTree["items"][$key]["items"] = $ret;
+			}
+		}
+		return false;
+	}
+}
+
 header('Content-type: application/json');
 
 if (file_exists("./dir.json") && !isset($_REQUEST["update"]))
 	readfile("./dir.json");
 else {
 	if (isset($_REQUEST["update"])) {
-		$tmp_dir = json_decode(file_get_contents("./dir.json"));
-		var_dump($tmp_dir);
+		$tmp_dir = json_decode(file_get_contents("./dir.json"), true);
+		$searchdir = "t413/SERIES/Walking Dead";
+		$found = find($searchdir, explode("/", $searchdir), $tmp_dir);
+		if ($found)
+		{
+			$found["items"] = scan($searchdir);
+		}
+		$dir_list = json_encode($tmp_dir);
 	}
 	else {
 		// Output the directory listing as JSON
@@ -55,7 +86,7 @@ else {
 		));
 
 		echo $dir_list;
-		file_put_contents("./dir.json", $dir_list);
 	}
+	file_put_contents("./dir.json", $dir_list);
 }
 //
