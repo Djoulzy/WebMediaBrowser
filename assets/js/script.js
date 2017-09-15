@@ -6,7 +6,7 @@ $(function(){
 
 	// Start by fetching the file data from scan.php with an AJAX request
 
-	$.get('scan.php?dir=t413', function(data) {
+	$.get('scan.php?dir='+window.root_dir, function(data) {
 
 		var response = [data],
 			currentPath = '',
@@ -333,7 +333,7 @@ $(function(){
 					fileType = fileType[fileType.length-1];
 
 					// icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
-					icon = '<img class="icon file" src="http://10.31.100.200:9999/w185/'+name+'/'+year+'" width="135px" />';
+					icon = '<img class="icon file" src="'+window.MVDB_Server+'/'+window.poster_size+'/'+name+'/'+year+'" width="135px" />';
 
 					var file = $('<li class="files"><a href="'+ f.path+'" title="'+ f.path +'" class="files">'
 						+ icon
