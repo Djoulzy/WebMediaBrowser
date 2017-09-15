@@ -1,7 +1,5 @@
 <?php
 
-$dir = $_REQUEST["dir"];
-
 // This function scans the files folder recursively, and builds a large array
 function scan($dir)
 {
@@ -65,9 +63,9 @@ header('Content-type: application/json');
 if (file_exists("./dir.json") && !isset($_REQUEST["update"]))
 	readfile("./dir.json");
 else {
-	if (isset($_REQUEST["update"])) {
+	if (isset($_REQUEST["update"]) && (isset($_REQUEST["dir"]))) {
 		$tmp_dir = json_decode(file_get_contents("./dir.json"), true);
-		$searchdir = "t413/SERIES/Walking Dead";
+		$searchdir = $_REQUEST["dir"];
 		$found = find($searchdir, explode("/", $searchdir), $tmp_dir);
 		if ($found)
 		{
@@ -77,11 +75,11 @@ else {
 	}
 	else {
 		// Output the directory listing as JSON
-		$response = scan($dir);
+		$response = scan($_REQUEST["dir"]);
 		$dir_list = json_encode(array(
-			"name" => $dir,
+			"name" => $_REQUEST["dir"],
 			"type" => "folder",
-			"path" => $dir,
+			"path" => $_REQUEST["dir"],
 			"items" => $response
 		));
 

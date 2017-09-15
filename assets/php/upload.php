@@ -41,7 +41,7 @@ if ($out) {
 if (!$chunks || $chunk == $chunks - 1) {
   // Strip the temp .part suffix off
   rename("{$filePath}.part", $filePath);
-  unlink('../../dir.json');
+  // unlink('../../dir.json');
 }
 
 die('{"OK": 1, "info": "Upload successful."}');
