@@ -121,6 +121,11 @@
 					BeforeUpload: function(up, file) {
 						up.settings.url = up.settings.php_uploader + '?dest=' +window.actual_dir;
 					},
+					UploadComplete: function(up, files) {
+						$.get('scan.php?dir='+window.actual_dir+'&update', function(data) {
+							window.location.reload(true);
+						});
+					},
 				}
 		    });
 		});

@@ -51,30 +51,37 @@ function find($dirToScan, $dirArray, &$dataTree)
 			if (($obj["type"] == "folder") && ($obj["name"] == $sub))
 			{
 				if ($ret = find($dirToScan, $dirArray, $dataTree["items"][$key]))
+				{
 					$dataTree["items"][$key]["items"] = $ret;
+					return $dataTree["items"];
+				}
 			}
 		}
 		return false;
 	}
 }
 
-header('Content-type: application/json');
-
 if (file_exists("./dir.json") && !isset($_REQUEST["update"]))
+{
+	header('Content-type: application/json');
 	readfile("./dir.json");
+}
 else {
 	if (isset($_REQUEST["update"]) && (isset($_REQUEST["dir"]))) {
+		header('Content-type: text/plain');
 		$tmp_dir = json_decode(file_get_contents("./dir.json"), true);
 		$searchdir = $_REQUEST["dir"];
-		$found = find($searchdir, explode("/", $searchdir), $tmp_dir);
-		if ($found)
+		if ($ret = find($searchdir, explode("/", $searchdir), $tmp_dir))
 		{
-			$found["items"] = scan($searchdir);
+			$dir_list = json_encode($tmp_dir);
+			file_put_contents("./dir.json", $dir_list);
+			echo "OK";
 		}
-		$dir_list = json_encode($tmp_dir);
+		else echo "KO";
 	}
 	else {
 		// Output the directory listing as JSON
+		header('Content-type: application/json');
 		$response = scan($_REQUEST["dir"]);
 		$dir_list = json_encode(array(
 			"name" => $_REQUEST["dir"],
@@ -84,7 +91,7 @@ else {
 		));
 
 		echo $dir_list;
+		file_put_contents("./dir.json", $dir_list);
 	}
-	file_put_contents("./dir.json", $dir_list);
 }
 //
