@@ -73,10 +73,10 @@
 				   out[2] = n[2] || '-'; // Origine
 				   if ( o = regex3.exec(n[1]) ) {
 					   out[3] = o[2] || '-'; // Qualite
-					   if ( p = regex4.exec(o[1]) ) {
-						   out[4] = p[1] || '-'; // Langue
-					   }
 				   }
+			   }
+			   if ( p = regex4.exec(tmp) ) {
+				   out[4] = p[1] || '-'; // Langue
 			   }
 		   } else {
 		       out[0] = '<font color="red">No match</font>';
