@@ -15,9 +15,9 @@
 <body>
 	<div class="filemanager">
 
-		<div class="search">
+		<!-- <div class="search">
 			<input type="search" placeholder="Find a file.." />
-		</div>
+		</div> -->
 
 		<div class="breadcrumbs"></div>
 
@@ -57,8 +57,8 @@
 
 		function extractData(it, html) {
 			var res = it.replaceAll("_", " ");
-		   var regex = /^(.+?)[.( \t]*((19\d{2}|20(?:0\d|1[0-9])).*|(?:(?=bluray|\d+p|brrip|webrip)..*)?[.](mkv|avi|mpe?g|mp4)$)/i;
-  		   var regex2 = /^(.+?)(bluray|brrip|webrip|HDLight|DVDrip|web-dl)(?:.+?)$/i;
+		   var regex = /^(.+?)[.( \t]*((19\d{2}|20(?:0\d|1[0-9])).*|(?:(?=\d+p|bluray|brrip|webrip|hdlight|dvdrip|web-dl|hdrip)..*)?[.](mkv|avi|mpe?g|mp4)$)/i;
+  		   var regex2 = /^(.+?)(bluray|brrip|webrip|hdlight|dvdrip|web-dl|hdrip)(?:.+?)$/i;
 		   var regex3 = /^(?:.+?)(?:[^\d](\d+p)[^p])(?:.*?)$/i;
 
 
@@ -68,7 +68,7 @@
 			   out[0] = titlelize(m[1]) || '-'; // Title
 			   out[1] = m[3] || '-';	// Year
 			   tmp = m[2].replaceAll("\\.", " ");
-			   tmp = tmp.replaceAll("-", " ");
+			//    tmp = tmp.replaceAll("-", " ");
 			   if ( n = regex2.exec(tmp) ) {
 				   out[2] = n[2] || '-'; // Origine
 				   if ( o = regex3.exec(n[1]) ) {
