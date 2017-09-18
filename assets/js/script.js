@@ -4,6 +4,19 @@ $(function(){
 		breadcrumbs = $('.breadcrumbs'),
 		fileList = filemanager.find('.data');
 
+	$( "#dialog" ).dialog({
+		autoOpen: false,
+		width: 800,
+		height: 600,
+		show: {
+			effect: "blind",
+			duration: 100
+		},
+		hide: {
+			effect: "blind",
+			duration: 100
+		}
+	});
 	// Start by fetching the file data from scan.php with an AJAX request
 
 	$.get('scan.php?dir='+window.root_dir, function(data) {
@@ -338,17 +351,33 @@ $(function(){
 					// icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
 					icon = '<img class="icon file" src="'+window.MVDB_Server+'/'+window.poster_size+'/'+name+'/'+year+'" width="135px" />';
 
-					var file = $('<li class="files"><a href="'+ f.path+'" title="'+ f.path +'" class="files">'
+					var file = $('<li class="files opener" media="'+f.path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
 						+ icon
-						+ '<span class="name">' + name + '<br/>'
+						+ '<span class="infos">'
+						+ '<span class="name">' + name + '</span><br/>'
 						+ '<span class="year">' + year + '</span><br/>'
 						+ '<span class="qualite">' + origine + ' - ' + qualite + '</span><br/>'
 						+ '<span class="qualite">' + langue + '</span><br/>'
 						+ '<span class="filetype">' + fileType + '</span> <span class="filesize">(' + fileSize + ')</span><br/>'
-						+'</span></a></li>');
+						+'</li>');
 					file.appendTo(fileList);
 				});
-
+				$( ".opener" ).click(function() {
+					mediaName = $(this).find(".name").html();
+					mediaYear = $(this).find(".year").html();
+					mediaDownload = $(this).attr("media");
+					// console.log(media);
+					details = '<span class="mediaDetails">'
+						+ '<img class="poster" src="'+window.MVDB_Server+'/'+window.cover_size+'/'+mediaName+'/'+mediaYear+'" width="342px" />'
+						+ '<span class="infos">'
+						+ '<span class="name">' + mediaName + '</span><br/>'
+						+ '<span class="year">(' + mediaYear + ')</span><br/>'
+						+ '<a class="download" href="'+mediaDownload+'">Download</a><br/>'
+						+ '</span>';
+						+ '</span>';
+					$( "#dialog" ).html(details);
+					$( "#dialog" ).dialog( "open" );
+				});
 			}
 
 

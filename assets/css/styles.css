@@ -193,9 +193,7 @@ body {
 	height: 100%;
 }
 
-.filemanager .data li .name {
-	color: #ffffff;
-	font-size: 15px;
+.filemanager .data li .infos {
 	font-weight: 700;
 	line-height: 20px;
 	width: 190px;
@@ -207,24 +205,69 @@ body {
 	top: 40px;
 }
 
-.filemanager .data li .name .year {
+.filemanager .data li .infos .name {
+	color: #ffffff;
+	font-size: 15px;
+}
+
+.filemanager .data li .infos .year {
 	color: #ffffff;
 	font-size: 12px;
 }
 
-.filemanager .data li .name .qualite {
+.filemanager .data li .infos .qualite {
 	color: #b3acac;
 	font-size: 12px;
 }
 
-.filemanager .data li .name .filesize {
+.filemanager .data li .infos .filesize {
 	color: #141313;
 	font-size: 10px;
 }
 
-.filemanager .data li .name .filetype {
+.filemanager .data li .infos .filetype {
 	color: #141313;
 	font-size: 12px;
+}
+
+.dialog {
+
+}
+
+.dialog .mediaDetails {
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+.dialog .mediaDetails .infos {
+	position: absolute;
+	padding: 20px;
+}
+
+.dialog .mediaDetails .infos .name {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.dialog .mediaDetails .infos .year {
+}
+
+.dialog .mediaDetails .infos .download {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 5%;
+}
+
+.dialog .mediaDetails .poster {
+	border-radius: 2%;
+	margin: 10px;
 }
 
 .filemanager .data li .details {
