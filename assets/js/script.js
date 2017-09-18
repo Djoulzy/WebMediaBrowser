@@ -366,12 +366,16 @@ $(function(){
 					mediaName = $(this).find(".name").html();
 					mediaYear = $(this).find(".year").html();
 					mediaDownload = $(this).attr("media");
+					$.get(window.MVDB_Server+'/syn/'+mediaName+'/'+mediaYear, function(data) {
+						$(".synopsy").html(data);
+					});
 					// console.log(media);
 					details = '<span class="mediaDetails">'
 						+ '<img class="poster" src="'+window.MVDB_Server+'/'+window.cover_size+'/'+mediaName+'/'+mediaYear+'" width="342px" />'
 						+ '<span class="infos">'
 						+ '<span class="name">' + mediaName + '</span><br/>'
-						+ '<span class="year">(' + mediaYear + ')</span><br/>'
+						+ '<span class="year">(' + mediaYear + ')</span><br/><br/>'
+						+ '<span class="synopsy"></span><br/><br/><br/>'
 						+ '<a class="download" href="'+mediaDownload+'">Download</a><br/>'
 						+ '</span>';
 						+ '</span>';
