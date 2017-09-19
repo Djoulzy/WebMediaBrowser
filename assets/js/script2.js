@@ -385,7 +385,7 @@ $(function(){
 					// fileType = fileType[fileType.length];
 
 					// icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
-					icon = '<img class="icon file" src="'+window.MVDB_Server+'/'+window.poster_size+'/'+name+'/'+year+'" width="135px" />';
+					icon = '<img class="icon file" src="'+window.MVDB_Server+'/art/'+window.poster_size+'/'+name+'/'+year+'" width="135px" />';
 
 					var file = $('<li class="files opener" media="'+f.path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
 						+ icon
@@ -407,7 +407,7 @@ $(function(){
 					});
 					// console.log(media);
 					details = '<span class="mediaDetails">'
-						+ '<img class="poster" src="'+window.MVDB_Server+'/'+window.cover_size+'/'+mediaName+'/'+mediaYear+'" width="342px" />'
+						+ '<img class="poster" src="'+window.MVDB_Server+'/art/'+window.cover_size+'/'+mediaName+'/'+mediaYear+'" width="342px" />'
 						+ '<span class="infos">'
 						+ '<span class="name">' + mediaName + '</span><br/>'
 						+ '<span class="year">(' + mediaYear + ')</span><br/><br/>'
