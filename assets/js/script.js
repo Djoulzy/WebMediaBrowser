@@ -354,7 +354,7 @@ $(function(){
 					var file = $('<li class="files opener" media="'+f.path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
 						+ icon
 						+ '<span class="infos">'
-						+ '<span class="name">' + name + '</span><br/>'
+						+ '<span class="title">' + name + '</span><br/>'
 						+ '<span class="year">' + year + '</span><br/>'
 						+ '<span class="qualite">' + origine + ' - ' + qualite + '</span><br/>'
 						+ '<span class="qualite">' + langue + '</span><br/>'
@@ -363,7 +363,7 @@ $(function(){
 					file.appendTo(fileList);
 				});
 				$( ".opener" ).click(function() {
-					mediaName = $(this).find(".name").html();
+					mediaName = $(this).find(".title").html();
 					mediaYear = $(this).find(".year").html();
 					mediaDownload = $(this).attr("media");
 					$.get(window.MVDB_Server+'/syn/'+mediaName+'/'+mediaYear, function(data) {

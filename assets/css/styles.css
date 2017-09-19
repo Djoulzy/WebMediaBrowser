@@ -185,6 +185,20 @@ body {
 
 }
 
+.filemanager .data li .name {
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 20px;
+	width: 150px;
+	white-space: nowrap;
+	display: inline-block;
+	position: absolute;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	top: 40px;
+}
+
 .filemanager .data li a {
 	position: absolute;
 	top: 0;
@@ -205,7 +219,7 @@ body {
 	top: 40px;
 }
 
-.filemanager .data li .infos .name {
+.filemanager .data li .infos .title {
 	color: #ffffff;
 	font-size: 15px;
 }
