@@ -16,7 +16,7 @@ function scan($dir)
 					"name" => $f,
 					"type" => "folder",
 					"path" => $dir . '/' . $f,
-					"items" => scan($dir . '/' . $f) // Recursively get the contents of the folder
+					//"items" => scan($dir . '/' . $f) // Recursively get the contents of the folder
 				);
 			}
 			else {
