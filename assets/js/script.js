@@ -1,5 +1,4 @@
 $(function(){
-
 	var filemanager = $('.filemanager'),
 		breadcrumbs = $('.breadcrumbs'),
 		fileList = filemanager.find('.data');
@@ -17,13 +16,10 @@ $(function(){
 			duration: 100
 		}
 	});
-	// Start by fetching the file data from scan.php with an AJAX request
 
-	$.get('scan.php?dir='+window.root_dir, function(data) {
-
-		var response = [data],
-			currentPath = '',
-			breadcrumbsUrls = [];
+	var contentList,
+		currentPath = '',
+		breadcrumbsUrls = [];
 
 		var folders = [],
 			files = [];
@@ -179,30 +175,36 @@ $(function(){
 				// if hash is some path
 
 				else if (hash[0].trim().length) {
+					searchByPathAjax(hash[0]).done(function(dataList){
+						rendered = dataList;
 
-					rendered = searchByPath(hash[0]);
+						if (Object.keys(rendered).length) {
 
-					if (rendered.length) {
+							currentPath = hash[0];
+							breadcrumbsUrls = generateBreadcrumbs(hash[0]);
+							render(rendered);
 
-						currentPath = hash[0];
-						breadcrumbsUrls = generateBreadcrumbs(hash[0]);
-						render(rendered);
+						}
+						else {
+							currentPath = hash[0];
+							breadcrumbsUrls = generateBreadcrumbs(hash[0]);
+							render(rendered);
+						}
 
-					}
-					else {
-						currentPath = hash[0];
-						breadcrumbsUrls = generateBreadcrumbs(hash[0]);
-						render(rendered);
-					}
+					});
+
+
 
 				}
 
 				// if there is no hash
 
 				else {
-					currentPath = data.path;
-					breadcrumbsUrls.push(data.path);
-					render(searchByPath(data.path));
+					$.get(window.MVDB_Server+'/scan/'+window.root_dir, function(data) {
+						currentPath = data.Path;
+						breadcrumbsUrls.push(data.Path);
+						render(data.Items);
+					});
 				}
 			}
 		}
@@ -220,31 +222,61 @@ $(function(){
 
 
 		// Locates a file by path
-
-		function searchByPath(dir) {
-			var path = dir.split('/'),
-				demo = response,
+		function searchByPath(dir){
+			var path = dir.Path.split('/'),
+				demo = [dir],
 				flag = 0;
 
-			for(var i=0;i<path.length;i++){
+			/*for(var i=0;i<path.length;i++){
 				for(var j=0;j<demo.length;j++){
-					if(demo[j].name === path[i]){
+					if(demo[j].Name === path[i]){
 						flag = 1;
-						demo = demo[j].items;
+						demo = demo[j].Items;
 						break;
 					}
 				}
-			}
+			}*/
 
-			demo = flag ? demo : [];
+			demo = demo[0].Items;
+			//demo = flag ? demo : [];
 			return demo;
+		}
+
+		function searchByPathAjax(dir) {
+			var dfd = $.Deferred();
+			var path = dir.split('/'),
+			demo = [],
+				flag = 0;
+
+			//get json - response from scan
+			$.get(window.MVDB_Server+'/scan/'+dir, function(data) {
+				contentList = [data];
+				demo = contentList[0].Items;
+
+				/*for(var i=0;i<path.length;i++){
+					for(var j=0;j<demo.length;j++){
+						if(demo[j].Name === path[i]){
+							flag = 1;
+							demo = demo[j].items;
+							break;
+						}
+					}
+				}
+
+				demo = flag ? demo : [];*/
+				//return demo;
+				dfd.resolve(demo);
+			});
+
+			return dfd.promise();
+
+
 		}
 
 
 		// Recursively search through the file tree
 
 		function searchData(data, searchTerms) {
-
 			data.forEach(function(d){
 				if(d.type === 'folder') {
 
@@ -271,27 +303,26 @@ $(function(){
 			var scannedFolders = [],
 				scannedFiles = [];
 
-			if(Array.isArray(data)) {
+			//if(Array.isArray(data)) {
+				//data.forEach(function (d) {
+				for(current in data){
+					d = data[current];
 
-				data.forEach(function (d) {
-
-					if (d.type === 'folder') {
+					if (d.Type === 'folder') {
 						scannedFolders.push(d);
 					}
-					else if (d.type === 'file') {
+					else if (d.Type === 'file') {
 						scannedFiles.push(d);
 					}
 
-				});
+				};
 
-			}
-			else if(typeof data === 'object') {
+		//	}
+			/*else if(typeof data === 'object') {
+				scannedFolders = data.Folders;
+				scannedFiles = data.Files;
 
-				scannedFolders = data.folders;
-				scannedFiles = data.files;
-
-			}
-
+			}*/
 
 			// Empty the old result and make the new one
 
@@ -307,8 +338,8 @@ $(function(){
 			if(scannedFolders.length) {
 
 				scannedFolders.forEach(function(f) {
-					var itemsLength = f.items.length,
-						name = escapeHTML(f.name),
+					var itemsLength = f.NBItems,
+						name = escapeHTML(f.Name),
 						icon = '<span class="icon folder"></span>';
 
 					if(itemsLength) {
@@ -325,7 +356,7 @@ $(function(){
 						itemsLength = 'Empty';
 					}
 
-					var folder = $('<li class="folders"><a href="'+ f.path +'" title="'+ f.path +'" class="folders">'+icon+'<span class="name">' + name + '</span> <span class="details">' + itemsLength + '</span></a></li>');
+					var folder = $('<li class="folders"><a href="'+ f.Path +'" title="'+ f.Path +'" class="folders">'+icon+'<span class="name">' + name + '</span> <span class="details">' + itemsLength + '</span></a></li>');
 					folder.appendTo(fileList);
 				});
 
@@ -334,24 +365,23 @@ $(function(){
 			if(scannedFiles.length) {
 
 				scannedFiles.forEach(function(f) {
-
-					var ext_data = extractData(f.name);
-					var fileSize = bytesToSize(f.size),
+					var ext_data = extractData(f.Name);
+					var fileSize = bytesToSize(f.Size),
 						// name = escapeHTML(f.name),
 						name = ext_data[0],
 						year = ext_data[1],
 						origine = ext_data[2],
 						qualite = ext_data[3],
-						langue = ext_data[4].toUpperCase();
+						langue = ext_data[4] && ext_data[4].toUpperCase();
 
-						tmp = f.name.split('.');
+						tmp = f.Name.split('.');
 						fileType = tmp[tmp.length-1].toUpperCase();
 					// fileType = fileType[fileType.length];
 
 					// icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
-					icon = '<img class="icon file" src="'+window.MVDB_Server+'/'+window.poster_size+'/'+name+'/'+year+'" width="135px" />';
+					icon = '<img class="icon file" src="'+window.MVDB_Server+'/art/'+window.poster_size+'/'+name+'/'+year+'" width="135px" />';
 
-					var file = $('<li class="files opener" media="'+f.path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
+					var file = $('<li class="files opener" media="'+f.Path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
 						+ icon
 						+ '<span class="infos">'
 						+ '<span class="title">' + name + '</span><br/>'
@@ -371,7 +401,7 @@ $(function(){
 					});
 					// console.log(media);
 					details = '<span class="mediaDetails">'
-						+ '<img class="poster" src="'+window.MVDB_Server+'/'+window.cover_size+'/'+mediaName+'/'+mediaYear+'" width="342px" />'
+						+ '<img class="poster" src="'+window.MVDB_Server+'/art/'+window.cover_size+'/'+mediaName+'/'+mediaYear+'" width="342px" />'
 						+ '<span class="infos">'
 						+ '<span class="name">' + mediaName + '</span><br/>'
 						+ '<span class="year">(' + mediaYear + ')</span><br/><br/>'
@@ -400,7 +430,6 @@ $(function(){
 				fileList.addClass('animated');
 
 				breadcrumbsUrls.forEach(function (u, i) {
-
 					var name = u.split('/');
 
 					if (i !== breadcrumbsUrls.length - 1) {
@@ -443,5 +472,4 @@ $(function(){
 			return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 		}
 
-	});
 });
