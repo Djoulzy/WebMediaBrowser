@@ -628,6 +628,12 @@ footer #tzine-actions iframe{
 	#bsaHolder, footer{ display:none;}
 }
 
+.copyright {
+	font-weight:bold;
+	font-size:10px;
+	color:#908f8f;
+}
+
 .uploader {
 	margin-left: 30px;
 	width: 90%;

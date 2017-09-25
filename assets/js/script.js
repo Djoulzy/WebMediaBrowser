@@ -365,30 +365,16 @@ $(function(){
 			if(scannedFiles.length) {
 
 				scannedFiles.forEach(function(f) {
-					var ext_data = extractData(f.Name);
-					var fileSize = bytesToSize(f.Size),
-						// name = escapeHTML(f.name),
-						name = ext_data[0],
-						year = ext_data[1],
-						origine = ext_data[2],
-						qualite = ext_data[3],
-						langue = ext_data[4] && ext_data[4].toUpperCase();
-
-						tmp = f.Name.split('.');
-						fileType = tmp[tmp.length-1].toUpperCase();
-					// fileType = fileType[fileType.length];
-
-					// icon = '<span class="icon file f-'+fileType+'">.'+fileType+'</span>';
-					icon = '<img class="icon file" src="'+window.MVDB_Server+'/art/'+window.poster_size+'/'+name+'/'+year+'" width="135px" />';
+					icon = '<img class="icon file" src="'+window.MVDB_Server+'/art/'+window.poster_size+'/'+f.Name+'/'+f.Year+'" width="135px" />';
 
 					var file = $('<li class="files opener" media="'+f.Path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
 						+ icon
 						+ '<span class="infos">'
-						+ '<span class="title">' + name + '</span><br/>'
-						+ '<span class="year">' + year + '</span><br/>'
-						+ '<span class="qualite">' + origine + ' - ' + qualite + '</span><br/>'
-						+ '<span class="qualite">' + langue + '</span><br/>'
-						+ '<span class="filetype">' + fileType + '</span> <span class="filesize">(' + fileSize + ')</span><br/>'
+						+ '<span class="title">' + f.Name + '</span><br/>'
+						+ '<span class="year">' + f.Year + '</span><br/>'
+						+ '<span class="qualite">' + f.Origine + ' - ' + f.Qualite + '</span><br/>'
+						+ '<span class="qualite">' + f.Langues + '</span><br/>'
+						+ '<span class="filetype">' + f.Ext.toUpperCase()+ '</span> <span class="filesize">(' + bytesToSize(f.Size) + ')</span><br/>'
 						+'</li>');
 					file.appendTo(fileList);
 				});

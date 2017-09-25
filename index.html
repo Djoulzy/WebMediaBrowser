@@ -11,6 +11,7 @@
 	<link href="assets/css/styles.css" rel="stylesheet"/>
 </head>
 <body>
+	<p class="copyright">CopyRight&copy;Watchever_2017 - v1.3 (25/09/2017)</p>
 	<div class="filemanager">
 
 		<!-- <div class="search">
@@ -123,9 +124,7 @@
 						up.settings.url = up.settings.php_uploader + '?dest=' +window.actual_dir;
 					},
 					UploadComplete: function(up, files) {
-						$.get('scan.php?dir='+window.actual_dir+'&update', function(data) {
-							window.location.reload(true);
-						});
+						window.location.reload(true);
 					},
 				}
 		    });
