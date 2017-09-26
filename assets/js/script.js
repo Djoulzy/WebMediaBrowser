@@ -24,9 +24,26 @@ $(function(){
 		var folders = [],
 			files = [];
 
+
+			$('.orderLink a').on('click', function(event){
+				event.preventDefault();
+				var hash1 = decodeURIComponent(window.location.hash).slice(1);
+				//hash = decodeURIComponent(hash).slice(1).split('=');
+				var hashForOrder = hash1+$(this).attr('href');
+				//alert(hashForOrder);
+				searchByPathAjax(hashForOrder).done(function(dataList){
+						rendered = dataList;
+							currentPath = hash1;
+							breadcrumbsUrls = generateBreadcrumbs(hash1);
+							render(rendered);
+
+					});
+
+
+
+			});
 		// This event listener monitors changes on the URL. We use it to
 		// capture back/forward navigation in the browser.
-
 		$(window).on('hashchange', function(){
 
 			goto(window.location.hash);
@@ -190,11 +207,7 @@ $(function(){
 							breadcrumbsUrls = generateBreadcrumbs(hash[0]);
 							render(rendered);
 						}
-
 					});
-
-
-
 				}
 
 				// if there is no hash
@@ -220,6 +233,9 @@ $(function(){
 			return path;
 		}
 
+		function orderFile(){
+			alert('order !!');
+		}
 
 		// Locates a file by path
 		function searchByPath(dir){
