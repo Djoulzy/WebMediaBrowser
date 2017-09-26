@@ -381,7 +381,7 @@ $(function(){
 			if(scannedFiles.length) {
 
 				scannedFiles.forEach(function(f) {
-					icon = '<img class="icon file" src="'+window.MVDB_Server+'/art/'+window.poster_size+'/'+f.Name+'/'+f.Year+'" width="135px" />';
+					icon = '<img class="icon file" src="'+f.ImgSmall+'" width="135px" />';
 
 					var file = $('<li class="files opener" media="'+f.Path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
 						+ icon
@@ -403,7 +403,7 @@ $(function(){
 					});
 					// console.log(media);
 					details = '<span class="mediaDetails">'
-						+ '<img class="poster" src="'+window.MVDB_Server+'/art/'+window.cover_size+'/'+mediaName+'/'+mediaYear+'" width="342px" />'
+						+ '<img class="poster" src="'+' '+'" width="342px" />'
 						+ '<span class="infos">'
 						+ '<span class="name">' + mediaName + '</span><br/>'
 						+ '<span class="year">(' + mediaYear + ')</span><br/><br/>'
