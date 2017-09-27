@@ -31,7 +31,7 @@ $(function(){
 	var folders = [],
 		files = [];
 
-	var orderType = 'date',
+	var orderType = 'date&desc=1',
 		nbrContent = 12;
 
 	var nbPageTot=1,
@@ -479,7 +479,7 @@ $(function(){
 					$( "#dialog" ).html(details);
 					$( "#dialog" ).dialog( "open" );
 				});
-				
+
 		}
 
 
