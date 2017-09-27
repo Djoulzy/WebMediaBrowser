@@ -413,10 +413,10 @@ body {
 	border-radius: 0.25em;
 	color: #FFF;
 	display: inline-block;
-	margin: 0.9em 1.2em 0.8em 1.3em;
+	margin: 0.6em 1.2em 0.8em 0.8em;
 	position: relative;
 	overflow: hidden;
-	box-shadow: 1.74em -2.1em 0 0 #A4A7AC inset;
+	/*box-shadow: 1.74em -2.1em 0 0 #A4A7AC inset;*/
 }
 .icon.file:first-line {
 	font-size: 13px;

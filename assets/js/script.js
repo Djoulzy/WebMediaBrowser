@@ -381,9 +381,9 @@ $(function(){
 			if(scannedFiles.length) {
 
 				scannedFiles.forEach(function(f) {
-					icon = '<img class="icon file" src="'+f.ImgSmall+'" width="135px" />';
+					icon = '<img class="icon file" src="'+f.ArtworkUrl+window.poster_size+'" width="135px" />';
 
-					var file = $('<li class="files opener" media="'+f.Path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
+					var file = $('<li class="files opener" tmdbid="'+f.TMDBID+'" media="'+f.Path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
 						+ icon
 						+ '<span class="infos">'
 						+ '<span class="title">' + f.Name + '</span><br/>'
@@ -395,15 +395,16 @@ $(function(){
 					file.appendTo(fileList);
 				});
 				$( ".opener" ).click(function() {
+					mediaID = $(this).attr("tmdbid");
 					mediaName = $(this).find(".title").html();
 					mediaYear = $(this).find(".year").html();
 					mediaDownload = $(this).attr("media");
-					$.get(window.MVDB_Server+'/syn/'+mediaName+'/'+mediaYear, function(data) {
-						$(".synopsy").html(data);
+					$.get(window.MVDB_Server+'/infos/'+mediaID, function(data) {
+						$(".synopsy").html(data.Overview);
+						console.log(data);
 					});
-					// console.log(media);
 					details = '<span class="mediaDetails">'
-						+ '<img class="poster" src="'+' '+'" width="342px" />'
+						+ '<img class="poster" src="'+window.MVDB_Server+'/art/'+mediaID+'/'+window.cover_size+'" width="342px" />'
 						+ '<span class="infos">'
 						+ '<span class="name">' + mediaName + '</span><br/>'
 						+ '<span class="year">(' + mediaYear + ')</span><br/><br/>'
