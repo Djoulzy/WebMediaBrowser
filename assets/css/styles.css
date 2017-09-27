@@ -31,7 +31,7 @@ body {
 	width: 95%;
 	/*max-width:1340px;*/
 	position: relative;
-	margin: 100px auto 50px;
+	margin: 50px auto 50px;
 }
 
 @media all and (max-width: 965px) {
@@ -153,7 +153,7 @@ body {
 -------------------------*/
 
 .filemanager .data {
-	margin-top: 60px;
+	margin-top: 30px;
 	margin-bottom: 20px;
 	z-index: -3;
 }
@@ -632,6 +632,19 @@ footer #tzine-actions iframe{
 	font-weight:bold;
 	font-size:10px;
 	color:#908f8f;
+}
+
+.orderLink {
+	text-align: center;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 35px;
+}
+
+.orderLink a {
+	color: #ffffff;
+	margin-left:20px;
+	margin-right:20px;
 }
 
 .uploader {
