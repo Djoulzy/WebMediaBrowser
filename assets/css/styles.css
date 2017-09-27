@@ -651,3 +651,7 @@ footer #tzine-actions iframe{
 	margin-left: 30px;
 	width: 90%;
 }
+
+.orginalname {
+	font-style: italic;
+}
