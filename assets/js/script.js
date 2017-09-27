@@ -7,6 +7,7 @@ $(function(){
 		autoOpen: false,
 		width: 800,
 		height: 600,
+		modal: true,
 		show: {
 			effect: "blind",
 			duration: 100
@@ -14,7 +15,13 @@ $(function(){
 		hide: {
 			effect: "blind",
 			duration: 100
-		}
+		},
+		open: function() {
+	        $('.overlay').addClass('custom-overlay');
+	    },
+	    close: function() {
+	        $('.overlay').removeClass('custom-overlay');
+	    }
 	});
 
 	var contentList,
@@ -404,17 +411,17 @@ $(function(){
 						data.Genres.forEach(function(elmt) {
 							tmp = tmp +" "+elmt.Name;
 						});
-						$(".year").html(data.production_companies[0].Name+" ("+data.release_date+")");
-						$(".genre").html(tmp);
-						$(".orginalname").html(data.original_title);
-						$(".synopsy").html(data.Overview);
+						$(".mediaDetails .year").html(data.production_companies[0].Name+" ("+data.release_date+")");
+						$(".mediaDetails .genre").html(tmp);
+						$(".mediaDetails .orginalname").html(data.original_title);
+						$(".mediaDetails .synopsy").html(data.Overview);
 					});
 					details = '<span class="mediaDetails">'
 						+ '<img class="poster" src="'+window.MVDB_Server+'/art/'+mediaID+'/'+window.cover_size+'" width="342px" />'
 						+ '<span class="infos">'
 						+ '<span class="name">' + mediaName + '</span><br/>'
 						+ '<span class="orginalname"></span><br/>'
-						+ '<span class="year">(' + mediaYear + ')</span><br/><br/>'
+						+ '<span class="year"></span><br/><br/>'
 						+ '<span class="genre"></span><br/><br/>'
 						+ '<span class="synopsy"></span><br/><br/><br/>'
 						+ '<a class="download" href="'+mediaDownload+'">Download</a><br/>'

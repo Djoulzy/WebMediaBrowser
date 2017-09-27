@@ -11,6 +11,7 @@
 	<link href="assets/css/styles.css" rel="stylesheet"/>
 </head>
 <body>
+	<div class="overlay">
 	<p class="copyright">CopyRight&copy;RegardeToujours_2017 - v2.0 (27/09/2017)</p>
 	<div class="filemanager">
 
@@ -37,6 +38,7 @@
 
 		<div id="dialog" class="dialog" title="Media Details"></div>
 	</div>
+	</div>
 	<!-- <footer>
         <a class="tz" href="http://tutorialzine.com/2014/09/cute-file-browser-jquery-ajax-php/">Cute File Browser with jQuery, AJAX and PHP</a>
         <div id="tzine-actions"></div>
@@ -50,45 +52,6 @@
 	<script type="text/javascript" src="assets/js/plupload/plupload.full.min.js"></script>
 	<script type="text/javascript" src="assets/js/plupload/jquery.ui.plupload/jquery.ui.plupload.js" charset="UTF-8"></script>
 	<script type="text/javascript">
-
-		String.prototype.replaceAll = function(search, replacement) {
-		    var target = this;
-		    return target.replace(new RegExp(search, 'g'), replacement);
-		}
-
-		function titlelize(title) {
-		   return title.replace(/(^|[. ]+)(\S)/g, function(all, pre, c) { return ((pre) ? ' ' : '') + c.toUpperCase(); });
-		};
-
-		function extractData(it, html) {
-			var res = it.replaceAll("_", " ");
-			var regex = /^(.+?)[.( \t]*((19\d{2}|20(?:0\d|1[0-9])).*|(?:(?=\d+p|bluray|brrip|webrip|hdlight|dvdrip|web-dl|hdrip)..*)?[.](mkv|avi|mpe?g|mp4)$)/i;
-			var regex2 = /^(.+?)(bluray|brrip|webrip|hdlight|dvdrip|web-dl|hdrip)(?:.+?)$/i;
-			var regex3 = /^(.+?)(?:[^\d](\d+p)[^p])(?:.*?)$/i;
-			var regex4 = /^(?:.+?)(multi|vf(?:\w*)|(?:\w*)french)(?:.+?)$/i;
-
-		   var out = new Array(5);
-
-		   if ( m = regex.exec(res) ) {
-			   out[0] = titlelize(m[1]) || '-'; // Title
-			   out[1] = m[3] || '-';	// Year
-			   tmp = m[2].replaceAll("\\.", " ");
-			//    tmp = tmp.replaceAll("-", " ");
-			   if ( n = regex2.exec(tmp) ) {
-				   out[2] = n[2] || '-'; // Origine
-				   if ( o = regex3.exec(n[1]) ) {
-					   out[3] = o[2] || '-'; // Qualite
-				   }
-			   }
-			   if ( p = regex4.exec(tmp) ) out[4] = p[1] || '-'; // Langue
-			   else out[4] = '-';
-		   } else {
-		       out[0] = '<font color="red">No match</font>';
-		   }
-		   //the replace is an hack to remove html in live input text
-		//    return (html) ? out : out.replace(/<[^>]+>|&[^;]+;/g,'');
-		return out;
-		}
 
 		$(function() {
 		    $("#uploader").plupload({
