@@ -8,6 +8,7 @@
 	<!-- Include our stylesheet -->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/dark-hive/jquery-ui.css">
 	<link type="text/css" rel="stylesheet" href="assets/js/plupload/jquery.ui.plupload/css/jquery.ui.plupload.css" media="screen" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 	<link href="assets/css/styles.css" rel="stylesheet"/>
 </head>
 <body>
@@ -25,8 +26,55 @@
 		    <p>Your browser doesn't have HTML5 support.</p>
 		</div>
 
-		<div class="orderLink">
-			<a href="?orderby=title">[A-Z]<a><a href="?orderby=title&desc=1">[Z-A]<a><a href="?orderby=date&desc=1">Plus recent<a><a href="?orderby=date">Plus ancien<a><a href="?orderby=year">Année<a>
+		<div>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+					    <a class="nav-link disabled">Trier par :</a>
+					  </li>
+						<li class="nav-item active">
+					    <a class="nav-link orderLink" orderby="date">Plus recent</a>
+					  </li>
+					  <li class="nav-item">
+					   	<a class="nav-link orderLink" orderby="date&desc=1">Plus ancien</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link orderLink" orderby="title">[A-Z]</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link orderLink" orderby="title&desc=1">[Z-A]</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link orderLink" orderby="year">Année</a>
+					  </li>
+			    </ul>
+					<ul class="navbar-nav">
+						<li class="nav-item">
+					    <a class="nav-link disabled">Nbr/page :</a>
+					  </li>
+						<li class="nav-item">
+					    <a class="nav-link orderLink" nbcontent="6">6</a>
+					  </li>
+					  <li class="nav-item active">
+					   	<a class="nav-link orderLink" nbcontent="12">12</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link orderLink" nbcontent="24">24</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link orderLink" nbcontent="36">36</a>
+					  </li>
+			    </ul>
+			  </div>
+			</nav>
+		</div>
+
+		<div class="paginatioN">
+			<span class="actionPagination" prev><<</span>
+			<span><input type="text" class="currentPage" value="0" /></span>
+			<span class="nbPageMx">/ 12</span>
+			<span class="actionPagination" next>>></span>
 		</div>
 
 		<ul class="data"></ul>
@@ -34,6 +82,13 @@
 		<div class="nothingfound">
 			<div class="nofiles"></div>
 			<span>No files here.</span>
+		</div>
+
+		<div class="paginatioN">
+			<span class="actionPagination" prev><<</span>
+			<span><input type="text" class="currentPage" value="0" /></span>
+			<span class="nbPageMx">/ 12</span>
+			<span class="actionPagination" next>>></span>
 		</div>
 
 		<div id="dialog" class="dialog" title="Media Details"></div>
