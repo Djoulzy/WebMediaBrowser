@@ -2,6 +2,7 @@ $(function(){
 	var filemanager = $('.filemanager'),
 		breadcrumbs = $('.breadcrumbs'),
 		fileList = filemanager.find('.data');
+		//fileList = filemanager.find('.dataContent');
 
 	$( "#dialog" ).dialog({
 		autoOpen: false,
@@ -182,7 +183,7 @@ $(function(){
 
 	// Clicking on folders
 
-	fileList.on('click', 'li.folders', function(e){
+	fileList.on('click', 'div.folders', function(e){
 		e.preventDefault();
 
 		var nextDir = $(this).find('a.folders').attr('href');
@@ -428,7 +429,8 @@ $(function(){
 					itemsLength = 'Empty';
 				}
 
-				var folder = $('<li class="folders"><a href="'+ f.Path +'" title="'+ f.Path +'" class="folders">'+icon+'<span class="name">' + name + '</span> <span class="details">' + itemsLength + '</span></a></li>');
+				//var folder = $('<li class="folders"><a href="'+ f.Path +'" title="'+ f.Path +'" class="folders">'+icon+'<span class="name">' + name + '</span> <span class="details">' + itemsLength + '</span></a></li>');
+				var folder = $('<div class="col-md-4"><div class="col-md-12 medias folders"><a href="'+ f.Path +'" title="'+ f.Path +'" class="folders"><div class="row"><div class="col-md-4">'+icon+'</div><div class="col-md-8"><div class="name">' + name + '</div> <div class="details">' + itemsLength + '</div></div></div></a></div></div>');
 				folder.appendTo(fileList);
 			});
 
@@ -437,17 +439,20 @@ $(function(){
 			if(scannedFiles.length) {
 
 				scannedFiles.forEach(function(f) {
-					icon = '<img class="icon file" src="'+f.ArtworkUrl+window.poster_size+'" width="135px" />';
+					icon = '<div class="col-md-5"><img class="icon file" src="'+f.ArtworkUrl+window.poster_size+'" width="100%" /></div>';
 
-					var file = $('<li class="files opener" tmdbid="'+f.TMDBID+'" media="'+f.Path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
+					//var file = $('<li class="files opener" tmdbid="'+f.TMDBID+'" media="'+f.Path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
+					//var folder = $('<div class="col-md-4"><div class="col-md-12 medias files opener"><a href="'+ f.Path +'" title="'+ f.Path +'" class="folders"><div class="row"><div class="col-md-4">'+icon+'</div><div class="col-md-8"><div class="name">' + name + '</div> <div class="details">' + itemsLength + '</div></div></div></a></div></div>');
+
+					var file = $('<div class="col-md-4"><div class="col-md-12 medias files opener" tmdbid="'+f.TMDBID+'" media="'+f.Path+'"><div class="row">'
 						+ icon
-						+ '<span class="infos">'
+						+ '<div class="col-md-7"><span class="infos">'
 						+ '<span class="title">' + f.Name + '</span><br/>'
 						+ '<span class="year">' + f.Year + '</span><br/>'
 						+ '<span class="qualite">' + f.Origine + ' - ' + f.Qualite + '</span><br/>'
 						+ '<span class="qualite">' + f.Langues + '</span><br/>'
 						+ '<span class="filetype">' + f.Ext.toUpperCase()+ '</span> <span class="filesize">(' + bytesToSize(f.Size) + ')</span><br/>'
-						+'</li>');
+						+'</div></div></div></div>');
 					file.appendTo(fileList);
 				});
 				$( ".opener" ).click(function() {
