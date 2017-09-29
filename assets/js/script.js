@@ -439,7 +439,7 @@ $(function(){
 			if(scannedFiles.length) {
 
 				scannedFiles.forEach(function(f) {
-					icon = '<div class="col-md-5"><img class="icon file" src="'+f.ArtworkUrl+window.poster_size+'" width="100%" /></div>';
+					icon = '<div class="col-md-5"><img class="icon file" src="'+f.ArtworkUrl+'" width="100%" /></div>';
 
 					//var file = $('<li class="files opener" tmdbid="'+f.TMDBID+'" media="'+f.Path+'">' //'<a href="'+ f.path+'" title="'+ f.path +'" class="files opener">'
 					//var folder = $('<div class="col-md-4"><div class="col-md-12 medias files opener"><a href="'+ f.Path +'" title="'+ f.Path +'" class="folders"><div class="row"><div class="col-md-4">'+icon+'</div><div class="col-md-8"><div class="name">' + name + '</div> <div class="details">' + itemsLength + '</div></div></div></a></div></div>');
