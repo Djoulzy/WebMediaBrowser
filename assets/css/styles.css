@@ -549,3 +549,6 @@ body {
 .paginatioN input{
 	width: 30px;
 }
+.nav-link, .actionPagination{
+	cursor: pointer;
+}
