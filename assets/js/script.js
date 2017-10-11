@@ -33,13 +33,14 @@ $(function(){
 		files = [];
 
 	var orderType = 'date&desc=1',
-		nbrContent = 12;
+		nbrContent = 36;
 
 	var nbPageTot=1,
 		currentPage=1;
 
-	$('.actionPagination').on('click', function(event){
+	$( "body" ).on( "click", ".page-link", function( event ) {
 		event.preventDefault();
+
 		var hash1 = decodeURIComponent(window.location.hash).slice(1);
 
 		if (typeof $(this).attr('prev') !== typeof undefined && $(this).attr('prev') !== false) {
@@ -48,12 +49,14 @@ $(function(){
 			}else{
 				currentPage-=1;
 			}
-		}else{
+		}else if (typeof $(this).attr('next') !== typeof undefined && $(this).attr('next') !== false) {
 			if(currentPage + 1 > nbPageTot){
 				return;
 			}else{
 				currentPage+=1;
 			}
+		}else{
+			currentPage = $(this).html();
 		}
 
 		var hashForOrder = hash1+'?orderby='+orderType+"&nb="+nbrContent+"&p="+currentPage;
@@ -276,6 +279,7 @@ $(function(){
 					currentPath = data.Path;
 					breadcrumbsUrls.push(data.Path);
 					render(data.Items);
+
 				});
 			}
 		}
@@ -336,6 +340,8 @@ $(function(){
 				$('.nbPageMx').html('/ '+nbPageTot)
 				$('.currentPage').val(data.DisplayedPage)
 			}
+
+			//getSuperPagination(nbPageTot, data.DisplayedPage)
 
 			dfd.resolve(demo);
 		});
@@ -518,7 +524,9 @@ $(function(){
 			url+='</ol>';
 		}
 		breadcrumbs.text('').append(url);
-
+//use contentList
+		//var toto = {NBPages:5, DisplayedPage:4};
+		getSuperPagination(contentList[0].NBPages, contentList[0].DisplayedPage);
 
 		// Show the generated elements
 
@@ -529,7 +537,69 @@ $(function(){
 		fileList.fadeIn();
 
 	}
+	function addHtmlPage(value, active = false, disabled = false, other = []){
 
+		var resultHTML = '<li class="page-item';
+
+		if(active)
+			resultHTML += ' active';
+		if(disabled)
+			resultHTML+=' disabled';
+
+		resultHTML+='"><a class="page-link" href="#" tabindex="-1"';
+
+		other.forEach(function(value){
+			resultHTML+=' '+value;
+		});
+
+		resultHTML+= '>'+value+'</a></li>';
+
+		return resultHTML;
+	}
+
+	function getSuperPagination(nbPage, current){
+		var maxPageInRow = 4;
+
+		var html = addHtmlPage('Previous', false, current == 1, ['prev']);//'<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" prev>Previous</a></li>';
+
+		if(nbPage<=maxPageInRow){
+			for (var pp = 1; pp <= maxPageInRow; pp++) {
+				html += addHtmlPage(pp, pp == current);//'<li class="page-item"><a class="page-link" href="#">'+pp+'</a></li>';
+			}
+		}else{
+			if(current<maxPageInRow){
+				for (var pp = 1; pp <= maxPageInRow; pp++) {
+					html += addHtmlPage(pp, pp == current);//'<li class="page-item"><a class="page-link" href="#">'+pp+'</a></li>';
+				}
+				if(nbPage != maxPageInRow+1){
+				html += addHtmlPage('...', false, true);//'<li class="page-item disabled"><a class="page-link" href="#">...</a></li>';
+				}
+				html += addHtmlPage(nbPage);//'<li class="page-item"><a class="page-link" href="#">'+nbPage+'</a></li>';
+			}else{
+				html += addHtmlPage('1');//'<li class="page-item"><a class="page-link" href="#">1</a></li>';
+				html += addHtmlPage('...', false, true);//'<li class="page-item disabled"><a class="page-link" href="#">...</a></li>';
+
+				var maxPage = (current+1 > nbPage) ? nbPage : current+1;
+				for (var pp = current-1; pp <= maxPage; pp++) {
+					html += addHtmlPage(pp, pp == current);//'<li class="page-item"><a class="page-link" href="#">'+pp+'</a></li>';
+				}
+
+				if(nbPage - current >= maxPageInRow-1){
+					html += addHtmlPage('...', false,true);//'<li class="page-item disabled"><a class="page-link" href="#">...</a></li>';
+				}
+
+				if(current+1 < nbPage){
+					html += addHtmlPage(nbPage);//'<li class="page-item"><a class="page-link" href="#">'+nbPage+'</a></li>';
+				}
+			}
+		}
+
+		html += addHtmlPage('Next', false, current == nbPage, ['next']);
+
+		$('.pagination').html(html);
+
+
+	}
 
 	// This function escapes special html characters in names
 

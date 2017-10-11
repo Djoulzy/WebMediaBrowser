@@ -552,3 +552,30 @@ body {
 .nav-link, .actionPagination{
 	cursor: pointer;
 }
+
+.page-link {
+    color: rgba(255,255,255,.5);
+    background-color: #343a40;
+    border: 1px solid transparent;
+}
+.page-item.disabled .page-link {
+    color: rgba(255,255,255,.25);
+    pointer-events: none;
+		background-color: #343a40;
+		border: 1px solid transparent;
+}
+.page-item.active .page-link {
+    z-index: 2;
+    color: #fff;
+    background-color: #42424E;
+    border: 1px solid transparent;
+}
+.page-link:focus, .page-link:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #42424E;
+    border: 1px solid transparent;
+}
+.paginationT413{
+	margin-top: 20px;
+}
