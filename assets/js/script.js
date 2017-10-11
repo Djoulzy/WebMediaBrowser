@@ -526,7 +526,8 @@ $(function(){
 		breadcrumbs.text('').append(url);
 //use contentList
 		//var toto = {NBPages:5, DisplayedPage:4};
-		getSuperPagination(contentList[0].NBPages, contentList[0].DisplayedPage);
+		if(contentList)
+			getSuperPagination(contentList[0].NBPages, contentList[0].DisplayedPage);
 
 		// Show the generated elements
 
@@ -559,11 +560,14 @@ $(function(){
 
 	function getSuperPagination(nbPage, current){
 		var maxPageInRow = 4;
-
+		console.log(nbPage, current);
+		html = "";
+if(nbPage>1){
 		var html = addHtmlPage('Previous', false, current == 1, ['prev']);//'<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" prev>Previous</a></li>';
 
+
 		if(nbPage<=maxPageInRow){
-			for (var pp = 1; pp <= maxPageInRow; pp++) {
+			for (var pp = 1; pp <= nbPage; pp++) {
 				html += addHtmlPage(pp, pp == current);//'<li class="page-item"><a class="page-link" href="#">'+pp+'</a></li>';
 			}
 		}else{
@@ -594,8 +598,9 @@ $(function(){
 			}
 		}
 
-		html += addHtmlPage('Next', false, current == nbPage, ['next']);
 
+		html += addHtmlPage('Next', false, current == nbPage, ['next']);
+}
 		$('.pagination').html(html);
 
 
